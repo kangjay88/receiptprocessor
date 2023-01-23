@@ -1,36 +1,38 @@
+from typing import List
+from typing import Any
+from dataclasses import dataclass, field
 from datetime import datetime
-from uuid import uuid4
+from datetime import date
+from datetime import time
+import decimal
+from decimal import Decimal
 
-data = []
-date = datetime.now()
+@dataclass
+class Item:
+    shortDescription: str
+    price: decimal
 
-class Receipt():
-    retailer = data.Column(data.String(250), primary_key=True)
-    purchase_date = data.Column(data.String(10), nullable = False, default=date.strftime("%Y-%m-%d"))
-    purchase_time= data.Column(data.String(10), nullable = False, default=date.strftime("%H:%M"))
-    items = data.relationship("Items", backref="items", lazy=True)
-    total = data.Column(data.String(10), nullable=False)
+    @staticmethod
+    def from_dict(obj: Any) -> 'Item':
+        _shortDescription = str(obj.get("shortDescription"))
+        _price = Decimal(str(obj.get("price")))
+        return Item(_shortDescription, _price)
 
-    def __init__(self, retailer, purchase_date, purchase_time, items, total):
-        self.retailer = retailer
-        self.purchase_date = purchase_date
-        self.purchase_time = purchase_time
-        self.items = items
-        self.total = total
+@dataclass
+class Receipt:
+    retailer: str
+    purchaseDate: date
+    purchaseTime: time
+    items: List[Item]
+    total: decimal
+    id: str = field(init=False)
+    points: int = field(init=False)
 
-    def createUUID():
-        return uuid4(Receipt)
-
-    def get_Item_price(self):
-        return
-
-    def to_dict(self):
-        return {}
-
-class Item():
-    shortDescription = data.Column(data.String(300), nullable=False)
-    price: data.Column(data.String(10), nullable=False)
-
-    def __init__(self, shortDescription, price):
-        self.shortDescription = shortDescription
-        self.price = price
+    @staticmethod
+    def from_dict(obj: Any) -> 'Receipt':
+        _retailer = str(obj.get("retailer"))
+        _purchaseDate = datetime.strptime(str(obj.get("purchaseDate")), "%Y-%m-%d").date()
+        _purchaseTime = datetime.strptime(str(obj.get("purchaseTime")), "%H:%M").time()
+        _items = [Item.from_dict(y) for y in obj.get("items")]
+        _total = Decimal(str(obj.get("total")))
+        return Receipt(_retailer, _purchaseDate, _purchaseTime, _items, _total)

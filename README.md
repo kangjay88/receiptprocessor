@@ -119,7 +119,7 @@ def get_points(id):
 ```
 In our `GET` request, this is what we are doing:
 * Looking up what we stored in the repo with generated uuid
-* Validating if receipt excists
+* Validating if receipt exists
 * Returning the total points value in a JSON str
 
 ## Rules

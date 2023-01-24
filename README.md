@@ -141,7 +141,7 @@ Our in-memory solution uses a class `Repo` which stores the receipt information 
         return Repo.receipt_dict.get(id)
 ```
 * `store_receipt()` is used in the `POST` request to store the object receipt in repo
-* `get_points(id)` is used in the `GET` request to get the generated uuid
+* `get_points(id)` is used in the `GET` request to get the calculated points
 
 ## Things to improve upon:
 * The `POST` request validates if the receipt is JSON, but it does not validate whether the JSON contains all the required fields necessary <br/>

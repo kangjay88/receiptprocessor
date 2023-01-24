@@ -122,8 +122,9 @@ In our `GET` request, this is what we are doing:
 * Validating if receipt excists
 * Returning the total points value in a JSON str
 
+## Rules
 **rules.py** <br/>
-We calculate rules by creating an Object for each rule implemented. Each object contains a `@staticmethod` decorator. <br/>
+We calculate rules by creating an Object for each rule implemented. Each object contains a static method with a common signature <br/>
 * Allows for additional rules to be easily implemented later <br/>
 **points.py** <br/>
 This page contains the `class Points`. Using the `def calculate()` method, will iterate over the rules list and return the total point amount. 

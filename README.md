@@ -9,7 +9,7 @@ Hello! Welcome to a receipt processor that was built using Python and Flask. Thi
 **Installation**:
 1. Clone the repo `git clone https://github.com/kangjay88/receiptprocessor.git `
 2. Type `docker build --tag fetchreceipts .` in the terminal - this installs the Docker container containing all our dependencies 
-3. To run, type `docker run -d -p 5000:5000 receipts` to start our container and test API endpoints
+3. To run, type `docker run -d -p 5000:5000 fetchreceipts` to start our container and test API endpoints
 **This will be running against your local host! http://127.0.0.1:5000**
 4. `docker ps` checks if any containers are currently running, `docker stop <container-name>` is how to stop running the container
 5. Create your own virtual env: `python -m venv venv` This is in Windows syntax 

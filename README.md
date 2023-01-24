@@ -12,10 +12,6 @@ Hello! Welcome to a receipt processor that was built using Python and Flask. Thi
 3. To run, type `docker run -d -p 5000:5000 fetchreceipts` to start our container and test API endpoints
 **This will be running against your local host! http://127.0.0.1:5000**
 4. `docker ps` checks if any containers are currently running, `docker stop <container-name>` is how to stop running the container
-5. Create your own virtual env: `python -m venv venv` This is in Windows syntax 
-6. Activate your virtual env: `venv\Scripts\activate` <br/>
-  a. Steps 4 and 5 are useful for managing Python projects if your system contains multiple Python projects, which could have different library versions <br/>
-  b. This creates an environment independent from previously installed libraries and your operating system. 
 
 **Dependencies: IF DOCKER IS NOT AVAILABLE: Use this code to install necessary dependencies!**
 `pip install <dependency>`
@@ -152,7 +148,7 @@ Our in-memory solution uses a class `Repo` which stores the receipt information 
   * To improve this, would create statement to iterate through attributes, and generate error if requirements of receipt JSON are not met
 * The in-memory solution can be implemented for a database in the future, such as `SQL-Alchemy`
 
-## The Big Question:
+## Design Question:
 **Where and when to calculate points** <br/>
 Right now, the points are calculated and stored in the `POST` `/process` call. This means the points will be calculated only once and cached. Multiple "points" calls are efficient with this method. However, if the rules change in the future, all receipts must be re-processed. <br />
 If we were to calculate on demand in the `/points` call, this would mean any rule changes would be automatically applied and not re-processed. However, there would be more processing if the rules and receipts remain the same, meaning the same calculation is done multiiple times.
